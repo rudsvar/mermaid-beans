@@ -1,6 +1,8 @@
+//! Mermaid diagram generator.
+
 use crate::model::ContextWrapper;
 
-/// Generate a Mermaid diagram from a `ContextWrapper` and a package filter.
+/// Generates a Mermaid diagram from a `ContextWrapper` and a package filter.
 pub fn generate_mermaid(context: ContextWrapper, package_filter: &str) -> String {
     let mut mermaid = String::new();
     mermaid.push_str("graph TD;\n");
