@@ -1,7 +1,18 @@
 # Mermaid Beans
 
 A mermaid diagram generator for Spring beans.
-See [mermaid.md](./tests/mermaid.md) for an example.
+
+```mermaid
+graph TD;
+subgraph demo
+    demoApplication["com.example.demo.DemoApplicationSpringCGLIB0"]
+    firstService["com.example.demo.FirstService"]
+    myController["com.example.demo.MyController"]
+    myController --> firstService
+    myController --> secondService
+    secondService["com.example.demo.SecondService"]
+end
+```
 
 ## Installation
 
