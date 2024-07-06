@@ -4,6 +4,7 @@ A mermaid diagram generator for Spring beans.
 
 ```mermaid
 graph TD;
+classDef transparent fill:#0000
 subgraph demo
     demoApplication["com.example.demo.DemoApplicationSpringCGLIB0"]
     firstService["com.example.demo.FirstService"]
@@ -12,6 +13,7 @@ subgraph demo
     myController --> secondService
     secondService["com.example.demo.SecondService"]
 end
+class demo transparent
 ```
 
 ## Installation

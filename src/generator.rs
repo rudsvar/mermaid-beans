@@ -4,6 +4,7 @@ use crate::model::ContextWrapper;
 pub fn generate_mermaid(context: ContextWrapper, package_filter: &str) -> String {
     let mut mermaid = String::new();
     mermaid.push_str("graph TD;\n");
+    mermaid.push_str("classDef transparent fill:#0000\n");
     for (context_name, context) in context.contexts {
         mermaid.push_str(&format!("subgraph {}\n", context_name));
         for (bean_name, bean) in context.beans {
@@ -19,6 +20,7 @@ pub fn generate_mermaid(context: ContextWrapper, package_filter: &str) -> String
             }
         }
         mermaid.push_str("end\n");
+        mermaid.push_str(&format!("class {} transparent\n", context_name));
     }
     mermaid
 }
