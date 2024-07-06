@@ -1,6 +1,7 @@
 use crate::model::ContextWrapper;
 
-pub fn to_mermaid(context: ContextWrapper, package_filter: &str) -> String {
+/// Generate a Mermaid diagram from a `ContextWrapper` and a package filter.
+pub fn generate_mermaid(context: ContextWrapper, package_filter: &str) -> String {
     let mut mermaid = String::new();
     mermaid.push_str("graph TD;\n");
     for (context_name, context) in context.contexts {
@@ -9,8 +10,11 @@ pub fn to_mermaid(context: ContextWrapper, package_filter: &str) -> String {
             if !bean.r#type.starts_with(package_filter) {
                 continue;
             }
-            mermaid.push_str(&format!("    {}[{}]\n", bean_name, bean.r#type));
+            let bean_name = bean_name.replace('$', "");
+            let bean_type = bean.r#type.replace('$', "");
+            mermaid.push_str(&format!("    {}[{}]\n", bean_name, bean_type));
             for dependency in bean.dependencies {
+                let dependency = dependency.replace('$', "");
                 mermaid.push_str(&format!("    {} --> {}\n", bean_name, dependency));
             }
         }
