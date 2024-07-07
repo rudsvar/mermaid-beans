@@ -1,5 +1,6 @@
+use std::str::FromStr;
+
 use clap::Parser;
-use reqwest::Url;
 
 #[derive(clap::Parser)]
 struct Args {
@@ -14,8 +15,8 @@ fn main() -> anyhow::Result<()> {
     let args: Args = Args::parse();
     let package_filter = args.package_filter.unwrap_or_default();
     let content = match args.uri {
-        Some(uri) => match Url::parse(&uri) {
-            Ok(url) => reqwest::blocking::get(url)?.text()?,
+        Some(uri) => match url::Url::from_str(&uri) {
+            Ok(_) => ureq::get(&uri).call()?.into_string()?,
             Err(_) => std::fs::read_to_string(uri)?,
         },
         None => std::io::read_to_string(std::io::stdin())?,
