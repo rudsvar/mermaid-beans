@@ -8,5 +8,5 @@ cargo generate-lockfile
 git add .
 git commit -m "Release version ${VERSION}"
 git tag "${VERSION}"
-git push
-git push --tags
+# git push
+# git push --tags
