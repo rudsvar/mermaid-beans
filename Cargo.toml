@@ -2,7 +2,7 @@
 name = "mermaid-beans"
 version = "0.1.0"
 edition = "2021"
-author = "Rudi Blaha Svartveit"
+authors = ["Rudi Blaha Svartveit"]
 repository = "https://github.com/rudsvar/mermaid-beans"
 
 [package.metadata.wix]
