@@ -10,7 +10,7 @@ pub fn generate_mermaid(context: ContextWrapper, package_filter: &str) -> String
     for (context_name, context) in context.contexts {
         mermaid.push_str(&format!("subgraph {}\n", context_name));
         for (bean_name, bean) in context.beans {
-            if !bean.r#type.starts_with(package_filter) {
+            if !bean.r#type.contains(package_filter) {
                 continue;
             }
             let bean_name = bean_name.replace('$', "");
