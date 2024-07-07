@@ -2,6 +2,14 @@
 name = "mermaid-beans"
 version = "0.1.0"
 edition = "2021"
+author = "Rudi Blaha Svartveit"
+repository = "https://github.com/rudsvar/mermaid-beans"
+
+[package.metadata.wix]
+upgrade-guid = "F34018CF-B833-4855-80F6-E125BDFE0B43"
+path-guid = "79EFA66C-9423-466C-9E80-5FDDC35D7AE0"
+license = false
+eula = false
 
 [dependencies]
 anyhow = "1.0.86"
@@ -15,3 +23,23 @@ serde_json = "1.0.120"
 
 [dev-dependencies]
 regex = "1.10.5"
+
+# The profile that 'cargo dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
+
+# Config for 'cargo dist'
+[workspace.metadata.dist]
+# The preferred cargo-dist version to use in CI (Cargo.toml SemVer syntax)
+cargo-dist-version = "0.18.0"
+# CI backends to support
+ci = "github"
+# The installers to generate for each app
+installers = ["shell"]
+# Target platforms to build apps for (Rust target-triple syntax)
+targets = ["x86_64-unknown-linux-gnu"]
+# Publish jobs to run in CI
+pr-run-mode = "plan"
+# Whether to install an updater program
+install-updater = false
