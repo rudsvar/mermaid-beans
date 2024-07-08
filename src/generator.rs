@@ -2,7 +2,7 @@
 
 use crate::model::ContextWrapper;
 
-static ALLOWED_CHARACTERS: &str = "#_";
+static ALLOWED_CHARACTERS: &str = "#._";
 
 /// Generates a Mermaid diagram from a `ContextWrapper` and a package filter.
 pub fn generate_mermaid(context: ContextWrapper, package_filter: &str) -> String {

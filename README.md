@@ -10,9 +10,9 @@ direction LR    demoApplication[demoApplication]
     itemController[itemController]
     itemController --> itemService
     itemRepository[itemRepository]
-    itemRepository --> jpanamedqueries0
-    itemRepository --> jpaItemRepositoryfragments0
-    itemRepository --> jpaSharedEMentityManagerFactory
+    itemRepository --> jpa.namedqueries#0
+    itemRepository --> jpa.ItemRepository.fragments#0
+    itemRepository --> jpaSharedEM_entityManagerFactory
     itemRepository --> jpaMappingContext
     itemService[itemService]
     itemService --> itemRepository
