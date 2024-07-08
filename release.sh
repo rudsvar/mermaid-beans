@@ -7,6 +7,6 @@ VERSION=$(cargo metadata --format-version=1 --no-deps | jq '.packages[0].version
 cargo generate-lockfile
 git add .
 git commit -m "Release version ${VERSION}"
-git tag "${VERSION}"
+git tag "v${VERSION}"
 git push
 git push --tags
