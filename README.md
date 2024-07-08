@@ -6,22 +6,17 @@ A mermaid diagram generator for Spring beans.
 graph TD;
 classDef transparent fill:#0000
 subgraph application
-direction LR    demoApplication[demoApplication]
-    click demoApplication callback "com.example.demo.DemoApplicationSpringCGLIB0"
-    itemController[itemController]
-    click itemController callback "com.example.demo.feature.item.ItemController"
+direction LR    demoApplication[<div title="com.example.demo.DemoApplicationSpringCGLIB0">demoApplication</div>]
+    itemController[<div title="com.example.demo.feature.item.ItemController">itemController</div>]
     itemController --> itemService
-    itemRepository[itemRepository]
-    click itemRepository callback "com.example.demo.feature.item.ItemRepository"
+    itemRepository[<div title="com.example.demo.feature.item.ItemRepository">itemRepository</div>]
     itemRepository --> jpa.namedqueries#0
     itemRepository --> jpa.ItemRepository.fragments#0
     itemRepository --> jpaSharedEM_entityManagerFactory
     itemRepository --> jpaMappingContext
-    itemService[itemService]
-    click itemService callback "com.example.demo.feature.item.ItemService"
+    itemService[<div title="com.example.demo.feature.item.ItemService">itemService</div>]
     itemService --> itemRepository
-    securityConfig[securityConfig]
-    click securityConfig callback "com.example.demo.infra.SecurityConfigSpringCGLIB0"
+    securityConfig[<div title="com.example.demo.infra.SecurityConfigSpringCGLIB0">securityConfig</div>]
 end
 class application transparent
 ```

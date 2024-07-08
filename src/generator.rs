@@ -21,10 +21,9 @@ pub fn generate_mermaid(context: ContextWrapper, r#type: &Regex) -> String {
             let legal_character = |c: &char| c.is_alphanumeric() || ALLOWED_CHARACTERS.contains(*c);
             let bean_name: String = bean_name.chars().filter(legal_character).collect();
             let bean_type: String = bean.r#type.chars().filter(legal_character).collect();
-            mermaid.push_str(&format!("    {}[{}]\n", bean_name, bean_name));
             mermaid.push_str(&format!(
-                "    click {} callback \"{}\"\n",
-                bean_name, bean_type
+                "    {}[<div title=\"{}\">{}</div>]\n",
+                bean_name, bean_type, bean_name
             ));
             for dependency in bean.dependencies {
                 let dependency: String = dependency.chars().filter(legal_character).collect();
