@@ -14,8 +14,7 @@ pub fn generate_mermaid(context: ContextWrapper, package_filter: &str) -> String
                 continue;
             }
             let bean_name = bean_name.replace('$', "");
-            let bean_type = bean.r#type.replace('$', "");
-            mermaid.push_str(&format!("    {}[\"{}\"]\n", bean_name, bean_type));
+            mermaid.push_str(&format!("    {}[\"{}\"]\n", bean_name, bean_name));
             for dependency in bean.dependencies {
                 let dependency = dependency.replace('$', "");
                 mermaid.push_str(&format!("    {} --> {}\n", bean_name, dependency));
