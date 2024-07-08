@@ -9,14 +9,16 @@ pub fn generate_mermaid(context: ContextWrapper, package_filter: &str) -> String
     mermaid.push_str("classDef transparent fill:#0000\n");
     for (context_name, context) in context.contexts {
         mermaid.push_str(&format!("subgraph {}\n", context_name));
+        mermaid.push_str("direction LR");
         for (bean_name, bean) in context.beans {
             if !bean.r#type.contains(package_filter) {
                 continue;
             }
-            let bean_name = bean_name.replace('$', "");
-            mermaid.push_str(&format!("    {}[\"{}\"]\n", bean_name, bean_name));
+            let bean_name: String = bean_name.chars().filter(|c| c.is_alphanumeric()).collect();
+            mermaid.push_str(&format!("    {}[{}]\n", bean_name, bean_name));
             for dependency in bean.dependencies {
-                let dependency = dependency.replace('$', "");
+                let dependency: String =
+                    dependency.chars().filter(|c| c.is_alphanumeric()).collect();
                 mermaid.push_str(&format!("    {} --> {}\n", bean_name, dependency));
             }
         }
