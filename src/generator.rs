@@ -2,6 +2,8 @@
 
 use crate::model::ContextWrapper;
 
+static ALLOWED_CHARACTERS: &str = "#_";
+
 /// Generates a Mermaid diagram from a `ContextWrapper` and a package filter.
 pub fn generate_mermaid(context: ContextWrapper, package_filter: &str) -> String {
     let mut mermaid = String::new();
@@ -14,11 +16,11 @@ pub fn generate_mermaid(context: ContextWrapper, package_filter: &str) -> String
             if !bean.r#type.contains(package_filter) {
                 continue;
             }
-            let bean_name: String = bean_name.chars().filter(|c| c.is_alphanumeric()).collect();
+            let legal_character = |c: &char| c.is_alphanumeric() || ALLOWED_CHARACTERS.contains(*c);
+            let bean_name: String = bean_name.chars().filter(legal_character).collect();
             mermaid.push_str(&format!("    {}[{}]\n", bean_name, bean_name));
             for dependency in bean.dependencies {
-                let dependency: String =
-                    dependency.chars().filter(|c| c.is_alphanumeric()).collect();
+                let dependency: String = dependency.chars().filter(legal_character).collect();
                 mermaid.push_str(&format!("    {} --> {}\n", bean_name, dependency));
             }
         }
