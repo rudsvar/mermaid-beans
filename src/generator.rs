@@ -22,12 +22,11 @@ pub fn generate_mermaid(context: ContextWrapper, r#type: &Regex) -> String {
             let bean_name: String = bean_name.chars().filter(legal_character).collect();
             let bean_type: String = bean.r#type.chars().filter(legal_character).collect();
             mermaid.push_str(&format!(
-                "    {}[<div title=\"{}\">{}</div>]\n",
-                bean_name, bean_type, bean_name
+                "    {bean_name}(<b>{bean_name}</b><div style=\"color: gray\">{bean_type}</div>)\n",
             ));
             for dependency in bean.dependencies {
                 let dependency: String = dependency.chars().filter(legal_character).collect();
-                mermaid.push_str(&format!("    {} --> {}\n", bean_name, dependency));
+                mermaid.push_str(&format!("    {bean_name} --> {dependency}\n",));
             }
         }
         mermaid.push_str("end\n");
