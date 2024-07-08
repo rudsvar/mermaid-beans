@@ -7,16 +7,21 @@ graph TD;
 classDef transparent fill:#0000
 subgraph application
 direction LR    demoApplication[demoApplication]
+    click demoApplication callback "com.example.demo.DemoApplicationSpringCGLIB0"
     itemController[itemController]
+    click itemController callback "com.example.demo.feature.item.ItemController"
     itemController --> itemService
     itemRepository[itemRepository]
+    click itemRepository callback "com.example.demo.feature.item.ItemRepository"
     itemRepository --> jpa.namedqueries#0
     itemRepository --> jpa.ItemRepository.fragments#0
     itemRepository --> jpaSharedEM_entityManagerFactory
     itemRepository --> jpaMappingContext
     itemService[itemService]
+    click itemService callback "com.example.demo.feature.item.ItemService"
     itemService --> itemRepository
     securityConfig[securityConfig]
+    click securityConfig callback "com.example.demo.infra.SecurityConfigSpringCGLIB0"
 end
 class application transparent
 ```
