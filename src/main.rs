@@ -18,6 +18,9 @@ struct Args {
     /// Direction of the graph.
     #[clap(short, long, default_value = "top-to-bottom")]
     direction: Direction,
+    /// Wrap the output in a code block.
+    #[clap(short, long)]
+    wrap: bool,
 }
 
 fn main() -> anyhow::Result<()> {
@@ -34,7 +37,11 @@ fn main() -> anyhow::Result<()> {
         r#type: args.r#type,
         name: args.name,
     };
-    let mermaid = mermaid_beans::mermaid_beans_markdown(top_level, &filters, args.direction);
+    let mermaid = if args.wrap {
+        mermaid_beans::mermaid_beans_markdown(top_level, &filters, args.direction)
+    } else {
+        mermaid_beans::mermaid_beans(top_level, &filters, args.direction)
+    };
     println!("{}", mermaid);
     Ok(())
 }

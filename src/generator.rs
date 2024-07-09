@@ -48,7 +48,7 @@ pub fn generate_mermaid(context: ContextWrapper, direction: Direction) -> String
             }
         }
         mermaid.push_str("end\n");
-        mermaid.push_str(&format!("class {} transparent\n", context_name));
+        mermaid.push_str(&format!("class {} transparent", context_name));
     }
     mermaid
 }
@@ -58,6 +58,6 @@ pub fn generate_mermaid_markdown(context: ContextWrapper, direction: Direction) 
     let mut mermaid = String::new();
     mermaid.push_str("```mermaid\n");
     mermaid.push_str(&generate_mermaid(context, direction));
-    mermaid.push_str("```");
+    mermaid.push_str("\n```");
     mermaid
 }
