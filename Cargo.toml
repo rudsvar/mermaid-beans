@@ -1,6 +1,6 @@
 [package]
 name = "mermaid-beans"
-version = "0.2.1"
+version = "0.3.0"
 edition = "2021"
 authors = ["Rudi Blaha Svartveit"]
 repository = "https://github.com/rudsvar/mermaid-beans"
