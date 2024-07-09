@@ -7,21 +7,12 @@ use regex::Regex;
 use crate::model::{Bean, Context, ContextWrapper};
 
 /// Filters for the package and bean names.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Default)]
 pub struct Filters {
     /// Regular expression for the package name.
-    pub r#type: Regex,
+    pub r#type: Vec<Regex>,
     /// Regular expression for the bean name.
-    pub name: Regex,
-}
-
-impl Default for Filters {
-    fn default() -> Self {
-        Self {
-            r#type: Regex::new("").unwrap(),
-            name: Regex::new("").unwrap(),
-        }
-    }
+    pub name: Vec<Regex>,
 }
 
 /// Filters beans by package and bean name, and removes any dependencies that are not in the filtered beans.
@@ -33,7 +24,8 @@ pub fn filter_context(context: ContextWrapper, filters: &Filters) -> ContextWrap
             .beans
             .into_iter()
             .filter(|(name, bean)| {
-                filters.r#type.is_match(&bean.r#type) && filters.name.is_match(name)
+                filters.r#type.iter().any(|t| t.is_match(&bean.r#type))
+                    || filters.name.iter().any(|n| n.is_match(name))
             })
             .collect();
 

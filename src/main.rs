@@ -4,18 +4,19 @@ use clap::Parser;
 use mermaid_beans::{filter::Filters, generator::Direction};
 use regex::Regex;
 
+/// A Mermaid diagram generator for Spring Boot Actuator beans.
 #[derive(clap::Parser)]
 struct Args {
     /// URL or file path. If not provided, reads from stdin.
     uri: Option<String>,
     /// Include beans by type (package).
     #[clap(short, long)]
-    r#type: Option<Regex>,
+    r#type: Vec<Regex>,
     /// Include beans by name.
     #[clap(short, long)]
-    name: Option<Regex>,
+    name: Vec<Regex>,
     /// Direction of the graph.
-    #[clap(short, long, default_value = "LR")]
+    #[clap(short, long, default_value = "top-to-bottom")]
     direction: Direction,
 }
 
@@ -30,8 +31,8 @@ fn main() -> anyhow::Result<()> {
     };
     let top_level: mermaid_beans::model::ContextWrapper = serde_json::from_str(&content)?;
     let filters = Filters {
-        r#type: args.r#type.unwrap_or(Regex::new("")?),
-        name: args.name.unwrap_or(Regex::new("")?),
+        r#type: args.r#type,
+        name: args.name,
     };
     let mermaid = mermaid_beans::mermaid_beans_markdown(top_level, &filters, args.direction);
     println!("{}", mermaid);

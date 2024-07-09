@@ -9,11 +9,10 @@ fn parse_and_write() {
     let mermaid = mermaid_beans::mermaid_beans_markdown(
         top_level,
         &Filters {
-            //r#type: Regex::new("com.example.demo").unwrap(),
-            name: Regex::new("(Controller|Service|Repository|entity)").unwrap(),
-            ..Default::default()
+            r#type: vec![Regex::new("com.example.demo").unwrap()],
+            name: vec![Regex::new("entity").unwrap()],
         },
-        Direction::TopDown,
+        Direction::TopToBottom,
     );
 
     // Update README.md with the generated mermaid.
