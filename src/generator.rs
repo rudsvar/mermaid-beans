@@ -2,6 +2,8 @@
 
 use std::fmt::Display;
 
+use heck::ToPascalCase;
+
 use crate::model::ContextWrapper;
 
 static ALLOWED_CHARACTERS: &str = "#._";
@@ -30,7 +32,10 @@ pub fn generate_mermaid(context: ContextWrapper, direction: Direction) -> String
     mermaid.push_str(&format!("graph {};\n", direction));
     mermaid.push_str("classDef transparent fill:#0000;\n");
     for (context_name, context) in context.contexts {
-        mermaid.push_str(&format!("subgraph \"{}\";\n", context_name));
+        mermaid.push_str(&format!(
+            "subgraph \"{}\";\n",
+            context_name.to_pascal_case()
+        ));
         mermaid.push_str(&format!("    direction {};\n", direction));
         for (bean_name, bean) in context.beans {
             let legal_character = |c: &char| c.is_alphanumeric() || ALLOWED_CHARACTERS.contains(*c);
@@ -48,7 +53,10 @@ pub fn generate_mermaid(context: ContextWrapper, direction: Direction) -> String
             }
         }
         mermaid.push_str("end\n");
-        mermaid.push_str(&format!("class {} transparent", context_name));
+        mermaid.push_str(&format!(
+            "class {} transparent",
+            context_name.to_pascal_case()
+        ));
     }
     mermaid
 }

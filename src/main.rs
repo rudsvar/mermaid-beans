@@ -16,7 +16,7 @@ struct Args {
     #[clap(short, long)]
     name: Vec<Regex>,
     /// Direction of the graph.
-    #[clap(short, long, default_value = "top-to-bottom")]
+    #[clap(short, long, default_value = "left-to-right")]
     direction: Direction,
     /// Wrap the output in a code block.
     #[clap(short, long)]
